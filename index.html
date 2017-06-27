@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.min.css">
+        <link rel="stylesheet" href="black.css">
+
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h2><b>Spark for Social Science</b></h2>
+                    <p>The Urban Institute's Approach to Big Data Statistics<p>
+                </section>
+                <section>
+                    <section>
+                        <h3>Me</h3>
+                         <ul>
+                            <li>Alex, hi.</li><br>
+                            <li>Professor of Data [Viz & Science] & Public Policy @UChicago</li><br>
+                            <li>Civic Data Scientist @ Urban Institute</li><br>
+                            <li>@alexcengler</li><br>
+                        </ul>
+                    </section>
+                     <section>
+                        <img src="images/uc-capp.png" width="1000"/> <br> 
+                    </section>
+                    <section>
+                        <img src="images/urban.png" width="400" />    
+                        <img src="images/centers.png" width="700"/>            
+                    </section>   
+                    <section>
+                        <img src="images/prison.png" width="800"/> <br> 
+                        <a href="http://webapp.urban.org/reducing-mass-incarceration/">Prison Population Forecaster</a>      
+                    </section>  
+                    <section>
+                        <img src="images/immig.png" width="1100"/> <br> 
+                        <a href="http://apps.urban.org/features/ncdb/immigrants-reshaping-residential-segregation/">Immigration and Residential Segregation</a>   
+                    </section>  
+                </section>
+                <section>
+                   <section>
+                        <img src="images/sloan.png" width="800"/>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Our Problem</h3>
+                        <ul>
+                            <li>Big Data</li>
+                            <li>Small Budget</li>
+                            <li>Advanced Statistics</li>
+                            <li>Programming Limitations</li>
+                        </uL>
+                    </section>
+                    <section>
+                        <h3>'Big Data'</h3>
+                         <ul>
+                            <li>~One Billion Rows (Growing to low tens of billions);</li>
+                            <li>Currently ~1TB of Data;</li>
+                            <li>Couple Hundred Columns;</li><br>
+                            <li>Ideally, this, or even several orders of magnitude higher, should be trivial.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3><u>Small</u> Budget</h3><br>
+                        
+                        <p>Affordability from Elasticity</p>
+                        <p>Standing Clusters - either in Cloud or on Premise are unaffordable.</p>
+                    </section>
+                    <section>
+                        <h3>Advanced Statistics<br>
+                        <img src="images/convex.png" width="800"/>                
+                    </section>    
+                    <section>
+                        <h3>Programming Limitations</h3><br>
+                         <ul>
+                            <li>Preference for SAS/STATA</li>
+                            <li>Some R-Users, a few Python-Users</li>
+                            <li>Java/Scala/C are off the table</li>
+                        </ul>       
+                        <p>Accessibility as a General Concern</p>      
+                    </section>          
+                </section>
+                <section>
+                    <section>
+                        <h3>Our Solution</h3>
+                        <ul>
+                            <li>Apache Spark</li>
+                            <li>R/Python w/ IDEs in Browser</li>
+                            <li>AWS Elastic MapReduce (EMR)</li>
+                        </uL>
+                    </section>
+                    <section>
+                        <h3><a href="http://spark.apache.org/">Apache Spark</a></h3><br>
+                        <p>More on Spark in a Minute</p>
+                        <img src='images/distribute.png' width="700"/>
+                    </section>
+                    <section>
+                        <p>Relatively Familiar Languages</p>
+                        <ul>
+                            <li><a href="https://github.com/UrbanInstitute/sparkr-tutorials">SparkR</a></li>
+                            <li><a href="https://github.com/UrbanInstitute/pyspark-tutorials">PySpark</a></li>
+                        </ul>
+                        <br><br><br>
+                        <p>Development Environments in Browser</p>
+                        <ul>
+                            <li>RStudio for R</li>
+                            <li>Jupyter Notebooks for Python</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Amazon Web Services (AWS) Elastic MapReduce (EMR)</h3>
+                        <ul>
+                            <li>Elastic - Only Pay for Clusters During Use</li>
+                            <li>Fast - 10-12 Min Spin Up w/ Bootstrap</li>
+                            <li>Free Data Transfer From S3 (AWS Storage)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Amazon Web Services (AWS) Elastic MapReduce (EMR)</h3>
+                        <p>Also Cheap: </p>
+                        <p>Four R3.8X Large EC2 Instances (Renting Four Computers in the Sky) gets you:
+                        </p>
+                        <ul>
+                            <li>244 GB Memory Each (~1TB Total)</li>
+                            <li>32v vCPU Each (128 Total)</li>
+                            <li>1300 GB SSD Storage</li>
+                        </ul>
+                        <p>All for ~$10/Hour</p>
+                        <p><a href="https://aws.amazon.com/ec2/instance-types/">List of EC2 Instances</a></p>
+                    </section>
+                    <section>
+                    `    <h3>Our Solution (Theory)</h3>
+                        <img src="images/stack1.png" width="600"/>
+                    </section>
+                    <section>
+                        <h3>Our Solution (Reality)</h3>
+                        <img src="images/stack2.png" width="600"/>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/UrbanInstitute/spark-social-science#3b-launch-a-cluster-with-the-aws-command-line">Launch from Command Line</a></h3>
+                        <img src="images/CLI.png" width="800"/>
+                    </section>
+                    <section>
+                        <h3><a href="https://github.com/UrbanInstitute/spark-social-science/blob/master/sparkr/EMR_SPARK_RSTUDIO_TEMPLATE.json">AWS CloudFormation</a></h3>
+                        <img src="images/CF.png" width="800"/>
+                    </section>
+                    <section>
+                        <h3>Data Security & Access</h3>
+                        <ul>
+                            <li>FedRamp Authority to Operate (ATO)</li>
+                            <li>Virtual Private Cloud</li>
+                            <li>Centrally Controlled Data Access in S3</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Use Cases</h3>
+                        <ul>
+                            <li>Large datasets from government and non-governmental sources;</li>
+                            <li>Microsimulation in the Cloud;</li>
+                            <li>Synthetic Data Generation.</li>
+                        </ul>
+                    </section>  
+                    <section>
+                        <h3>Next Steps</h3>
+                        <ul>
+                            <li>Course: Advanced Big Data Methods using Spark;</li>
+                            <li>Expanding Available Social Science Methods;</li>
+                            <li>Apache Toree for Integrating R/Python Kernels</li>
+                        </ul>
+                    </section>  
+                </section>
+                <section>
+                    <section>
+                        <h3>What is Apache Spark?</h3><br>
+                        <p>A distributed in-memory framework for big data analysis.</p><br>
+                        <ul>
+                            <li>Written in Scala/Java but has R/Python APIs</li>
+                            <li>Good & Improving Statistical Methods</li>
+                            <li>Free & Open Source</li>
+                            <ul>
+                                <li><a href="https://issues.apache.org/jira/projects/SPARK/summary">Apache Spark Jira</a></li>
+                                <li><a href="https://github.com/apache/spark">Apache Spark GitHub</a></li>
+                            </ul>
+                            <li>Largely implicitly parallel</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Origins of Apache Spark</h3><br>
+                        <img src="images/amp.png" width="800"/>
+                    </section>
+                    <section>
+                        <h3>Origins of Apache Spark</h3><br>
+                        <img src="images/rdd.png" width="900"/>
+                    </section>
+                    <section>
+                        <h3>RDD: Partitioning</h3><br>
+                        <p>Spark's RDD works by executing code on partitions - logical splits of the data by observation (or row) - that are spread across a cluster of machines.</p><br>
+                    </section>
+                    <section>
+                        <h3>RDD: Fault Tolerance</h3><br>
+                        <p>The RDD solved an important problem - efficient fault tolerance in distributed memory. While, Hadoop relied on replication, which is untenable (too expensive) in distributed memory, the RDD uses a Directed Acyclic Graph model.</p>
+                    </section>
+                    <section>
+                        <h3>The Directed Acyclic Graph (DAG)</h3>
+                        <img src='images/distribute.png' width="700"/> 
+                    </section>
+                    <section>
+                        <img src='images/lazy.png' width="700"/> 
+                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#transformations">Transformation</a>: Operations on an RDD that don't return or write anything. </p>
+                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#actions">Action</a>: Operations on an RDD that return or write a result. Executes all required prior transformations in the DAG.</p>
+                    </section>
+                    <section>
+                        <p>Actions Return Something and/or Require DAG Execution</p>
+                        <img src='images/operations.png' width="900"/> 
+                    </section>
+                    <section>
+                        <h3>Statistical Methods for Regression</h3>
+                        <p><a href="https://spark.apache.org/docs/2.1.0/mllib-optimization.html">Optimization Methods</a>: L-BFGS & SGD</p><br>
+                        <p>This solves for the GLM and thus also fixed effects and difference-in-difference models.</p><br>
+                        <p>However, other methods are not yet included (e.g. random effects) or require different not-yet-developed optimization in distributed memory (e.g. quantile regression).</p>
+                    </section>
+                    <section>
+                        <h3>SparkR Dataframe</h3><br>
+                        <p>SparkR is now using the newer dataframe API, which replaces some aspects of the RDD, though many of the underlying principals are the same.</p>
+                    </section>
+                    <section>
+                        <h3>More Resources</h3>
+                        <ul>
+                            <li><a href="https://github.com/UrbanInstitute/spark-social-science">Urban Institute Spark Cluster Launch</a></li>
+                            <li><a href="https://github.com/UrbanInstitute/sparkr-tutorials">Urban Institute SparkR Tutorials</a></li>
+                            <li><a href="https://www.amazon.com/Learning-Spark-Lightning-Fast-Data-Analysis/dp/1449358624">Learning Spark Book</a></li>
+                            <li><a href="http://spark.rstudio.com/">SparklyR</a></li>
+                            <li><a href="https://blog.matthewrathbone.com/2017/01/13/spark-books.html">Ten Books on Spark</a></li>
+                            <li>Advanced: <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/">Mastering Apache Spark</a>
+                        </ul>
+                    </section>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.min.js"></script>
+        <script>
+            Reveal.initialize({
+                transition: 'default',  // fade/slide/convex/concave/zoom
+                transitionSpeed: 'slow'
+            });
+        </script>
+    </body>
+</html>

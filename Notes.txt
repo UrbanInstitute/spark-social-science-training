@@ -1,0 +1,168 @@
+SPARK TRAINING NOTES
+
+
+-Questions:
+--Who has used Cloud Compute before?
+--Who has used R before?
+--Who understands parallel processing? (Still works significantly the same, but message passing is very very fast)
+
+
+
+## TUTORIAL WALKTHROUGH ##
+ 
+What participants are running: https://github.com/UI-Research/sloan-spark-internal/blob/master/site-awscli-connector/start.php
+
+
+API DOCS ARE MORE THOROUGH
+SparkR Documentation: https://spark.apache.org/docs/latest/sparkr.html
+SparkR API Docs: https://spark.apache.org/docs/latest/api/R/index.html 
+
+
+
+
+
+
+#### LOOKING AT DATA
+
+colnames(dat)
+dim(dat)
+str(dat)
+head(dat)
+
+
+## Note all blanks and empty strings read into Spark as null
+printSchema(dat)
+
+
+
+
+
+
+
+
+######## Lazy Evaluation - DAG is optimized for ALL upcoming decisions. Order of operations may be changed significantly. Shuffling and movement of data/memory is optimized. If you don't need to perform an action, don't, it'll be more efficient. Memory is the critical resoruce here, so creating each iteration of the RDD at each step is wasteful of an important resource.
+
+## How does the showing take longer than the aggregation (Lazy evaluation)
+agg_df <- agg(dat, avg_HO_rate = avg(dat$HO_rate))
+showDF(agg_df)
+
+
+## describe
+sumstats_income <- describe(dat, "income")
+showDF(sumstats_income)
+
+
+# Grouped Aggregation
+## NOTE THIS WEIRD SYNTAX:
+new <- groupBy(dat, dat$cbsa2013)
+agg_df <- agg(new, avg_HO_rate = avg(dat$HO_rate), count = n(dat$year))
+showDF(agg_df)
+
+
+
+## ADVANTAGE OF THE DAG (Knowing Order of Operations - Spark will not aggregate for years under 2010):
+
+new <- groupBy(dat, dat$cbsa2013)
+agg_df <- agg(new, avg_HO_rate = avg(dat$HO_rate), count = n(dat$year))
+agg_df_lim <- filter(agg_df, year > 2010)
+showDF(agg_df_lim)
+
+
+
+
+
+freq <- count(groupBy(dat, "year"))
+collect(freq)
+
+
+
+
+
+
+
+
+
+## Visualization:
+library(ggplot2)
+
+hstats <- histogram(dat, "income", nbins = 10)
+head(hstats)
+
+g1 <- ggplot(hstats, aes(x = centroids, y = counts)) + geom_path() + xlab("income") + ylab("Frequency") + ggtitle("Histogram of CBSA Income")
+g1
+
+
+
+## This will not work:
+ggplot(dat)
+
+
+## So you need to collect and then run the analyses:
+dat_group <- groupBy(dat, dat$year)
+dat_agg <- agg(dat_group, avg_HO_rate = avg(dat$HO_rate))
+
+dat_local <- collect(dat_agg) ## collect is an action
+head(dat_agg)
+
+ggplot(dat_local, aes(x = year, y=avg_HO_rate)) + geom_line()
+
+
+## Ok so what did we just do? Remember our data is spread across multiple machines. Not in one place. Asking for a graph of it makes no sense. We have to aggregate then graph locally.
+
+
+
+## Similarly, we developed a bivariate histogram (looks like a scatterplot, but with density) for seeing two continuous vars.
+
+https://github.com/UrbanInstitute/sparkr-tutorials/blob/master/R/geom_bivar_histogram_SparkR.R
+
+
+
+
+## Regression:
+
+lm1 <- spark.glm(dat, HO_rate ~ income + coborrower + fvr, family = "gaussian")
+output1 <- summary(lm1)
+output1
+
+
+## Note that regression also gets messed with for big data methods:
+
+
+
+1. MapReduce and Parallelization for Analysis:
+
+
+Parallel Processing;
+Hadoop added distributed storage across a cluster (many computers);
+Spark adds distributed memory. This is important for anything that uses iterative computation.
+
+--Parellel Processing: Great for splitting some task up acrossa bunch of processors. Totally independent
+
+--Really bad for k-means clustering. Spark improves this massively. Also regression methods, but that's a bit less intuitive unless your calculus is strong.
+
+--Really fast, meaning we can now work interactively with big datasets. This is great, also means we can 
+
+
+Mathematical Optimization: https://spark.apache.org/docs/2.1.0/mllib-optimization.html 
+
+
+
+
+
+
+
+
+
+
+
+--GET FEEDBACK
+---IF Anyone goes on to do research with this - PLEASE let us know so we can tell the funder
+
+
+
+
+
+
+
+
+
