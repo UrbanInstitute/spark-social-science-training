@@ -142,6 +142,9 @@
                         <img src="images/stack2.png" width="600"/>
                     </section>
                     <section>
+                        <p>So, we wrote a bunch of <a href='https://github.com/UrbanInstitute/spark-social-science/blob/master/pyspark/jupyter_pyspark_emr5-proc.sh'>bootstrap scripts</a>.</p>
+                    </section>
+                    <section>
                         <h3><a href="https://github.com/UrbanInstitute/spark-social-science#3b-launch-a-cluster-with-the-aws-command-line">Launch from Command Line</a></h3>
                         <img src="images/CLI.png" width="800"/>
                     </section>
@@ -206,30 +209,41 @@
                     </section>
                     <section>
                         <h3>RDD: Partitioning</h3><br>
-                        <p>Spark's RDD works by executing code on partitions - logical splits of the data by observation (or row) - that are spread across a cluster of machines.</p><br>
+                        <p>Spark's RDD works by implicitly executing code on partitions - logical splits of the data by observation (or row) - that are spread across a cluster of machines.</p><br>
                     </section>
                     <section>
-                        <h3>RDD: Fault Tolerance</h3><br>
-                        <p>The RDD solved an important problem - efficient fault tolerance in distributed memory. While, Hadoop relied on replication, which is untenable (too expensive) in distributed memory, the RDD uses a Directed Acyclic Graph model.</p>
+                        <img src="images/driver-exec.png"  width="700"/>
+                    </section>
+                    <section>
+                        <h4>Shuffles are Expensive</h4>
+                        <img src="images/narrow-wide.png"  width="700"/>
+                        <a href="https://github.com/UrbanInstitute/pyspark-tutorials/blob/master/06_pivoting.ipynb
+">Reshaping requires a shuffle</a>
+                    </section>
+
+                    <section>
+                        <img src='images/lazy.png' width="700"/> 
+                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#transformations">Transformation</a>: Operations on an RDD that don't return or write anything. </p>
+                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#actions">Action</a>: Operations on an RDD that return or write a result. Executes all required prior transformations.</p>
+                    </section>
+                    <section>
+                        <p>Actions Return Something or Write Something to External Storage</p>
+                        <img src='images/operations.png' width="900"/> 
                     </section>
                     <section>
                         <h3>The Directed Acyclic Graph (DAG)</h3>
                         <img src='images/distribute.png' width="700"/> 
                     </section>
                     <section>
-                        <img src='images/lazy.png' width="700"/> 
-                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#transformations">Transformation</a>: Operations on an RDD that don't return or write anything. </p>
-                        <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#actions">Action</a>: Operations on an RDD that return or write a result. Executes all required prior transformations in the DAG.</p>
-                    </section>
-                    <section>
-                        <p>Actions Return Something and/or Require DAG Execution</p>
-                        <img src='images/operations.png' width="900"/> 
+                        <h3>Fault Tolerance</h3><br>
+                        <p>The RDD solved an important problem - efficient fault tolerance in distributed memory. While, Hadoop relied on replication, which is untenable (too expensive) in distributed memory, the RDD uses the Directed Acyclic Graph model.</p>
                     </section>
                     <section>
                         <h3>Statistical Methods for Regression</h3>
                         <p><a href="https://spark.apache.org/docs/2.1.0/mllib-optimization.html">Optimization Methods</a>: L-BFGS & SGD</p><br>
                         <p>This solves for the GLM and thus also fixed effects and difference-in-difference models.</p><br>
                         <p>However, other methods are not yet included (e.g. random effects) or require different not-yet-developed optimization in distributed memory (e.g. quantile regression).</p>
+                        <p><a href="https://spark.apache.org/docs/2.1.0/ml-classification-regression.html">List of Spark Methods</a></p>
                     </section>
                     <section>
                         <h3>Other Statistical Learning Methods</h3>
@@ -239,10 +253,6 @@
                             <li><a href="https://github.com/twosigma/flint">Flint - Time Series Analysis in Spark</a></li>
                             <li><a href="http://sryza.github.io/spark-timeseries/0.3.0/index.html">TS-Spark Package?</a></li>
                         </ul>   
-                    </section>
-                    <section>
-                        <h3>SparkR Dataframe</h3><br>
-                        <p>SparkR is now using the newer dataframe API, which replaces some aspects of the RDD, though many of the underlying principals are the same.</p>
                     </section>
                     <section>
                         <h3>More Resources</h3>
