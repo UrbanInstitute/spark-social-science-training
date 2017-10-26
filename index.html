@@ -16,7 +16,7 @@
                         <h3>Me</h3>
                         <ul>
                             <li>Alex, hi.</li>
-                            <li>Lecturer of Data [Viz & Science] & Public Policy @UChicago</li>
+                            <li>I Teach Data [Viz & Science] & Public Policy @UChicago</li>
                             <li>Contributing Data Scientist @ Urban Institute</li><br/>
                             <li>Twitter: @alexcengler</li>
                             <li>alexcengler@uchicago.edu</li>
@@ -208,19 +208,13 @@
                         <img src="images/rdd.png" width="900"/>
                     </section>
                     <section>
-                        <h3>RDD: Partitioning</h3><br>
-                        <p>Spark's RDD works by implicitly executing code on partitions - logical splits of the data by observation (or row) - that are spread across a cluster of machines.</p><br>
-                    </section>
-                    <section>
                         <img src="images/driver-exec.png"  width="700"/>
                     </section>
                     <section>
-                        <h4>Shuffles are Expensive</h4>
-                        <img src="images/narrow-wide.png"  width="700"/>
-                        <a href="https://github.com/UrbanInstitute/pyspark-tutorials/blob/master/06_pivoting.ipynb
-">Reshaping requires a shuffle</a>
+                        <h3>RDD: Partitioning</h3><br>
+                        <p>Spark's RDD works by implicitly executing code on partitions - logical splits of the data by observation (or row) - that are spread across a cluster of machines.</p><br>
+                        <p>The Dataframe API allows you to run implicitly parallelized operations across these partitions.</p> 
                     </section>
-
                     <section>
                         <img src='images/lazy.png' width="700"/> 
                         <p><a href="https://spark.apache.org/docs/latest/programming-guide.html#transformations">Transformation</a>: Operations on an RDD that don't return or write anything. </p>
@@ -237,6 +231,11 @@
                     <section>
                         <h3>Fault Tolerance</h3><br>
                         <p>The RDD solved an important problem - efficient fault tolerance in distributed memory. While, Hadoop relied on replication, which is untenable (too expensive) in distributed memory, the RDD uses the Directed Acyclic Graph model.</p>
+                    </section>
+                    <section>
+                        <h4>Shuffles are Expensive</h4>
+                        <img src="images/narrow-wide.png"  width="600"/><br/>
+                        <a href="https://github.com/UrbanInstitute/pyspark-tutorials/blob/master/06_pivoting.ipynb">Reshaping requires a shuffle</a>
                     </section>
                     <section>
                         <h3>Statistical Methods for Regression</h3>
